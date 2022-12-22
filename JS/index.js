@@ -96,7 +96,7 @@ const getRandomInt = (min, max) => {
 // перемешивание массива
 const shuffleFruits = () => {
   let result = [];
-  
+  let mix = fruits.slice();
   // ATTENTION: сейчас при клике вы запустите бесконечный цикл и браузер зависнет
   while (fruits.length > 0) {
     // TODO: допишите функцию перемешивания массива
@@ -106,12 +106,12 @@ const shuffleFruits = () => {
     // ex.: [1, 2, 3], [] => [1, 3], [2] => [3], [2, 1] => [], [2, 1, 3]
     // (массив fruits будет уменьшатся, а result заполняться)
     let randomFruit = getRandomInt(0, fruits.length - 1);
-    let newArrFruit = fruits[randomFruit];
+    result.push(fruits[randomFruit]);
     fruits.splice(randomFruit, 1);
-    result.push(newArrFruit);
-    if (fruits === result) {
+    if (JSON.stringify(result) === JSON.stringify(mix)) {
       alert('Порядок не изменился! Повторите перемешивание')
-    }
+      fruits = mix;
+    } 
   }
   fruits = result;
 };
